@@ -8,6 +8,7 @@ import express, {
 import dotenv from "dotenv";
 import { errorHandler } from "./middlewares/errorHandler";
 import productsRoute from "./routes/productsRoutes";
+import usersRoutes from "./routes/userRoutes";
 import { ApiError } from "./utils/apiError";
 import morgan from "morgan";
 import path from "path";
@@ -26,9 +27,10 @@ app.get("/", (req, res, next) => {
 
 // Routes
 app.use("/api/v1/products", productsRoute);
+app.use("/api/v1/users", usersRoutes);
 
 // Error Route
-app.use((req: Request, res: Response, next: NextFunction) =>  {
+app.use((req: Request, res: Response, next: NextFunction) => {
   next(new ApiError(`Route ${req.originalUrl} not found`, 404));
 });
 

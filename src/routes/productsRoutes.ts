@@ -7,7 +7,10 @@ import {
   updateProduct,
 } from "../controllers/productsControllers";
 import { multiUpload } from "../middlewares/upload";
-import { validatorCreateProduct } from "../utils/validators/product.validator";
+import {
+  validatorCreateProduct,
+  validatorUpdateProduct,
+} from "../utils/validators/product.validator";
 import { handleImages } from "../middlewares/handleImagesToBody";
 const router = express.Router();
 
@@ -18,7 +21,7 @@ router
 router
   .route("/:id")
   .get(getProductById)
-  .put(updateProduct)
+  .put(multiUpload, handleImages, validatorUpdateProduct, updateProduct)
   .delete(deleteProduct);
 
 export default router;

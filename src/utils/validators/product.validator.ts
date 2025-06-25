@@ -1,5 +1,5 @@
 import { check } from "express-validator";
-import { validator } from "../../middlewares/expressValidator";
+import { errorValidator } from "../../middlewares/expressValidator";
 
 export const validatorCreateProduct = [
   check("name")
@@ -14,7 +14,11 @@ export const validatorCreateProduct = [
     .isString()
     .withMessage("Description must be a text"),
 
-  check("images").notEmpty().withMessage("At least one image is required"),
+  check("images")
+    .isArray({ min: 1 })
+    .withMessage("At least one image is required")
+    .isArray({ max: 4 })
+    .withMessage("Maximum 5 images allowed"),
 
   check("price")
     .notEmpty()
@@ -30,5 +34,45 @@ export const validatorCreateProduct = [
     .withMessage("Quantity must be a non-negative integer")
     .toInt(),
 
-  validator,
+  errorValidator,
+];
+
+export const validatorUpdateProduct = [
+  check("name")
+    .optional()
+    .trim()
+    .notEmpty()
+    .withMessage("Product name cannot be empty")
+    .isLength({ min: 2, max: 250 })
+    .withMessage("Name must be between 2 to 250 characters"),
+
+  check("description")
+    .optional()
+    .isString()
+    .withMessage("Description must be a text"),
+
+  check("images")
+    .optional()
+    .isArray({ min: 1 })
+    .withMessage("At least one image is required when providing images")
+    .isArray({ max: 4 })
+    .withMessage("Maximum 5 images allowed"),
+
+  check("price")
+    .optional()
+    .notEmpty()
+    .withMessage("Price cannot be empty")
+    .isFloat({ gt: 0 })
+    .withMessage("Price must be a positive number")
+    .toFloat(),
+
+  check("quantity")
+    .optional()
+    .notEmpty()
+    .withMessage("Quantity cannot be empty")
+    .isInt({ min: 0 })
+    .withMessage("Quantity must be a non-negative integer")
+    .toInt(),
+
+  errorValidator,
 ];
