@@ -1,0 +1,28 @@
+{
+  "sqltools.connections": [
+    {
+      "mysqlOptions": {
+        "authProtocol": "default",
+        "enableSsl": "Disabled"
+      },
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 3307,
+      "driver": "MySQL",
+      "name": "mysql1",
+      "database": "default",
+      "username": "root",
+      "askForPassword": true
+    },
+    {
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 5432,
+      "askForPassword": true,
+      "driver": "PostgreSQL",
+      "name": "posstgres1",
+      "database": "ecommerce",
+      "username": "postgres"
+    }
+  ]
+}
