@@ -12,12 +12,20 @@ import {
   validatorUpdateProduct,
 } from "../utils/validators/product.validator";
 import { handleImages } from "../middlewares/handleImagesToBody";
+import { allowedTo, protectAuth } from "../controllers/authControllers";
 const router = express.Router();
 
 router
   .route("/")
-  .post(multiUpload, handleImages, validatorCreateProduct, createProduct)
-  .get(getAllProducts);
+  .post(
+    protectAuth,
+    allowedTo("admin"),
+    multiUpload,
+    handleImages,
+    validatorCreateProduct,
+    createProduct
+  )
+  .get(protectAuth, getAllProducts);
 router
   .route("/:id")
   .get(getProductById)

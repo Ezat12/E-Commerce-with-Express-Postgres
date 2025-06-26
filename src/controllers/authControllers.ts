@@ -65,5 +65,46 @@ export const login = expressAsyncHandler(
   }
 );
 
+export const protectAuth = expressAsyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    let token: string = "";
 
+    if (req.headers.authorization) {
+      token = req.headers.authorization.split(" ")[1];
+    }
 
+    if (!token.length) {
+      return next(new ApiError("You are not logged in, please log in", 401));
+    }
+
+    let decoded: jwt.JwtPayload;
+
+    decoded = jwt.verify(
+      token,
+      process.env.SECRET_KEY as string
+    ) as jwt.JwtPayload;
+
+    const id = decoded.id;
+
+    const [user] = await db.select().from(User).where(eq(User.id, id));
+
+    if (!user) {
+      return next(new ApiError("User not found", 404));
+    }
+
+    (req as any).user = user;
+
+    next();
+  }
+);
+
+export const allowedTo =
+  (...role: string[]) =>
+  (req: Request, res: Response, next: NextFunction) => {
+    if (!role.includes((req as any).user.role)) {
+      return next(
+        new ApiError("You are not authorized to access this route", 403)
+      );
+    }
+    next();
+  };
