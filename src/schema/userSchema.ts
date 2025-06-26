@@ -13,7 +13,7 @@ export const userSchema = pgTable("users", {
   id: serial().primaryKey(),
   name: varchar({ length: 200 }).notNull(),
   email: varchar().unique().notNull(),
-  password: varchar({ length: 50 }).notNull(),
+  password: varchar({ length: 250 }).notNull(),
   phone: varchar({ length: 15 }),
   avatar: varchar(),
   active: boolean().default(true),

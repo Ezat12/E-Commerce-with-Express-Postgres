@@ -9,6 +9,7 @@ import dotenv from "dotenv";
 import { errorHandler } from "./middlewares/errorHandler";
 import productsRoute from "./routes/productsRoutes";
 import usersRoutes from "./routes/userRoutes";
+import authRoutes from "./routes/authRoutes";
 import { ApiError } from "./utils/apiError";
 import morgan from "morgan";
 import path from "path";
@@ -28,6 +29,7 @@ app.get("/", (req, res, next) => {
 // Routes
 app.use("/api/v1/products", productsRoute);
 app.use("/api/v1/users", usersRoutes);
+app.use("/api/v1/auth", authRoutes);
 
 // Error Route
 app.use((req: Request, res: Response, next: NextFunction) => {
