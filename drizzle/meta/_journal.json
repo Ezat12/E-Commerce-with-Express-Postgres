@@ -15,6 +15,13 @@
       "when": 1750890429110,
       "tag": "0001_dusty_wonder_man",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1751117100566,
+      "tag": "0002_panoramic_ronan",
+      "breakpoints": true
     }
   ]
 }
