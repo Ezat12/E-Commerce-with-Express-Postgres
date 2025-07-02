@@ -9,7 +9,7 @@ import {
   jsonb,
 } from "drizzle-orm/pg-core";
 
-export const products = pgTable("products", {
+export const productsSchema = pgTable("products", {
   id: serial("id").primaryKey(),
   name: varchar("name", { length: 250 }).notNull(),
   description: text("description"),

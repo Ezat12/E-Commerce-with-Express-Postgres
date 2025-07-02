@@ -11,6 +11,7 @@ import productsRoute from "./routes/productsRoutes";
 import usersRoutes from "./routes/userRoutes";
 import authRoutes from "./routes/authRoutes";
 import addressesRoutes from "./routes/addressesRoutes";
+import cartsRoutes from "./routes/cartsRoutes";
 import { ApiError } from "./utils/apiError";
 import morgan from "morgan";
 import path from "path";
@@ -32,6 +33,7 @@ app.use("/api/v1/products", productsRoute);
 app.use("/api/v1/users", usersRoutes);
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/addresses", addressesRoutes);
+app.use("/api/v1/carts", cartsRoutes);
 
 // Error Route
 app.use((req: Request, res: Response, next: NextFunction) => {

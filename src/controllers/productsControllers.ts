@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { db } from "../config/db";
-import { products as Products } from "../schema";
+import { productsSchema as Products } from "../schema";
 import { eq } from "drizzle-orm";
 import { ApiError } from "../utils/apiError";
 import asyncHandler from "express-async-handler";

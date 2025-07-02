@@ -5,7 +5,9 @@
   "main": "drizzle.config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:dev": "ts-node-dev ./src/index.ts"
+    "start:dev": "ts-node-dev ./src/index.ts",
+    "generate:db": "drizzle-kit generate",
+    "migrate:db": "drizzle-kit migrate"
   },
   "keywords": [],
   "author": "",
