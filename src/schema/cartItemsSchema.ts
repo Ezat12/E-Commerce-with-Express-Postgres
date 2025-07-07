@@ -1,5 +1,6 @@
 import {
   integer,
+  numeric,
   pgTable,
   serial,
   timestamp,
@@ -18,6 +19,10 @@ export const cartItemsSchema = pgTable(
     productId: integer("product_id")
       .notNull()
       .references(() => Products.id),
+    priceProduct: numeric("price_product", {
+      precision: 10,
+      scale: 2,
+    }).notNull(),
     quantity: integer().notNull(),
     createdAt: timestamp().defaultNow(),
     updatedAt: timestamp().defaultNow(),

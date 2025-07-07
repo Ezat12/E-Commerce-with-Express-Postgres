@@ -77,8 +77,15 @@ export const createCart = expressAsyncHandler(
 
     const { productId, quantity } = req.body;
     if (!productId || !quantity) {
-      return next(new ApiError("Product ID and quantity are required", 400));
+      return next(
+        new ApiError("Product ID, quantity and price product are required", 400)
+      );
     }
+
+    const [product] = await db
+      .select()
+      .from(Products)
+      .where(eq(Products.id, productId));
 
     let [cart] = await db.select().from(Carts).where(eq(Carts.userId, userId));
 
@@ -87,7 +94,12 @@ export const createCart = expressAsyncHandler(
 
       const cartItems = await db
         .insert(CartItems)
-        .values({ cartId: newCart.id, productId, quantity })
+        .values({
+          cartId: newCart.id,
+          productId,
+          priceProduct: product.price,
+          quantity,
+        })
         .returning();
 
       await getTotalCart({ id: newCart.id });
@@ -112,6 +124,7 @@ export const createCart = expressAsyncHandler(
         await db.insert(CartItems).values({
           cartId: cart.id,
           productId,
+          priceProduct: product.price,
           quantity,
         });
       }

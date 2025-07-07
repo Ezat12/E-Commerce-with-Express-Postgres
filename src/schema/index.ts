@@ -5,3 +5,5 @@ export * from "./cartsSchema";
 export * from "./cartItemsSchema";
 export * from "./wishlistSchema";
 export * from "./wishlistItemsSchema";
+export * from "./ordersSchema";
+export * from "./orderItemsSchema";

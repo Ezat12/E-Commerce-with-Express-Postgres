@@ -4,5 +4,8 @@
 -- INNER JOIN products AS p ON p.id = ci.product_id
 -- ;
 
+-- 
+SELECT * FROM order_items;
 
-SELECT * FROM wishlist_items;
+
+-- DELETE FROM carts where id =12;

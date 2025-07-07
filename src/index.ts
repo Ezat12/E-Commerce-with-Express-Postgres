@@ -13,6 +13,7 @@ import authRoutes from "./routes/authRoutes";
 import addressesRoutes from "./routes/addressesRoutes";
 import cartsRoutes from "./routes/cartsRoutes";
 import wishlistRoute from "./routes/wishlistRoutes";
+import orderRoute from "./routes/ordersRoutes";
 import { ApiError } from "./utils/apiError";
 import morgan from "morgan";
 import path from "path";
@@ -36,6 +37,7 @@ app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/addresses", addressesRoutes);
 app.use("/api/v1/carts", cartsRoutes);
 app.use("/api/v1/wishlist", wishlistRoute);
+app.use("/api/v1/orders", orderRoute);
 
 // Error Route
 app.use((req: Request, res: Response, next: NextFunction) => {
